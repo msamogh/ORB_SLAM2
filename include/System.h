@@ -24,6 +24,7 @@
 
 #include<string>
 #include<thread>
+#include <unistd.h>
 #include<opencv2/core/core.hpp>
 
 #include "Tracking.h"
@@ -93,6 +94,8 @@ public:
     // It waits until all threads have finished.
     // This function must be called before saving the trajectory.
     void Shutdown();
+
+    void SaveMapPoints(const string &filename);
 
     // Save camera trajectory in the TUM RGB-D dataset format.
     // Only for stereo and RGB-D. This method does not work for monocular.

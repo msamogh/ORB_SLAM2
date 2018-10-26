@@ -135,7 +135,7 @@ int main(int argc, char **argv)
 
         cv::remap(imLeft,imLeftRect,M1l,M2l,cv::INTER_LINEAR);
         cv::remap(imRight,imRightRect,M1r,M2r,cv::INTER_LINEAR);
-
+        SLAM.SaveMapPoints("MapPoints.txt");
         double tframe = vTimeStamp[ni];
 
 
@@ -184,6 +184,7 @@ int main(int argc, char **argv)
     cout << "mean tracking time: " << totaltime/nImages << endl;
 
     // Save camera trajectory
+    SLAM.SaveMapPoints("MapPoints.txt");
     SLAM.SaveTrajectoryTUM("CameraTrajectory.txt");
 
     return 0;
@@ -197,8 +198,11 @@ void LoadImages(const string &strPathLeft, const string &strPathRight, const str
     vTimeStamps.reserve(5000);
     vstrImageLeft.reserve(5000);
     vstrImageRight.reserve(5000);
+    int count = 0;
     while(!fTimes.eof())
     {
+        count++;
+        if (count == 200) continue;
         string s;
         getline(fTimes,s);
         if(!s.empty())

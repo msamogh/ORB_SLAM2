@@ -75,7 +75,7 @@ cv::Mat FrameDrawer::DrawFrame()
         cvtColor(im,im,CV_GRAY2BGR);
 
     //Draw
-    if(state==Tracking::NOT_INITIALIZED) //INITIALIZING
+    if (state == Tracking::NOT_INITIALIZED) //INITIALIZING
     {
         for(unsigned int i=0; i<vMatches.size(); i++)
         {
@@ -86,33 +86,33 @@ cv::Mat FrameDrawer::DrawFrame()
             }
         }        
     }
-    else if(state==Tracking::OK) //TRACKING
+    else if (state == Tracking::OK) //TRACKING
     {
-        mnTracked=0;
-        mnTrackedVO=0;
+        mnTracked = 0;
+        mnTrackedVO = 0;
         const float r = 5;
         const int n = vCurrentKeys.size();
-        for(int i=0;i<n;i++)
+        for(int i = 0; i < n; i++)
         {
             if(vbVO[i] || vbMap[i])
             {
-                cv::Point2f pt1,pt2;
-                pt1.x=vCurrentKeys[i].pt.x-r;
-                pt1.y=vCurrentKeys[i].pt.y-r;
-                pt2.x=vCurrentKeys[i].pt.x+r;
-                pt2.y=vCurrentKeys[i].pt.y+r;
+                cv::Point2f pt1, pt2;
+                pt1.x = vCurrentKeys[i].pt.x - r;
+                pt1.y = vCurrentKeys[i].pt.y - r;
+                pt2.x = vCurrentKeys[i].pt.x + r;
+                pt2.y = vCurrentKeys[i].pt.y + r;
 
                 // This is a match to a MapPoint in the map
                 if(vbMap[i])
                 {
-                    cv::rectangle(im,pt1,pt2,cv::Scalar(0,255,0));
-                    cv::circle(im,vCurrentKeys[i].pt,2,cv::Scalar(0,255,0),-1);
+                    cv::rectangle(im, pt1, pt2, cv::Scalar(0, 255, 0));
+                    cv::circle(im, vCurrentKeys[i].pt, 2, cv::Scalar(0, 255, 0), -1);
                     mnTracked++;
                 }
                 else // This is match to a "visual odometry" MapPoint created in the last frame
                 {
-                    cv::rectangle(im,pt1,pt2,cv::Scalar(255,0,0));
-                    cv::circle(im,vCurrentKeys[i].pt,2,cv::Scalar(255,0,0),-1);
+                    cv::rectangle(im, pt1, pt2, cv::Scalar(255, 0, 0));
+                    cv::circle(im, vCurrentKeys[i].pt, 2, cv::Scalar(255, 0, 0), -1);
                     mnTrackedVO++;
                 }
             }
@@ -120,7 +120,7 @@ cv::Mat FrameDrawer::DrawFrame()
     }
 
     cv::Mat imWithInfo;
-    DrawTextInfo(im,state, imWithInfo);
+    DrawTextInfo(im, state, imWithInfo);
 
     return imWithInfo;
 }

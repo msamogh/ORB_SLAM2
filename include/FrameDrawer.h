@@ -27,6 +27,7 @@
 
 #include<opencv2/core/core.hpp>
 #include<opencv2/features2d/features2d.hpp>
+#include<opencv2/highgui/highgui.hpp>
 
 #include<mutex>
 
@@ -48,6 +49,8 @@ public:
     // Draw last processed frame.
     cv::Mat DrawFrame();
 
+    vector<cv::KeyPoint> mvCurrentKeys;
+
 protected:
 
     void DrawTextInfo(cv::Mat &im, int nState, cv::Mat &imText);
@@ -55,7 +58,6 @@ protected:
     // Info of the frame to be drawn
     cv::Mat mIm;
     int N;
-    vector<cv::KeyPoint> mvCurrentKeys;
     vector<bool> mvbMap, mvbVO;
     bool mbOnlyTracking;
     int mnTracked, mnTrackedVO;

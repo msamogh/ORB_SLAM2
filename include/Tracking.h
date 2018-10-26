@@ -96,6 +96,9 @@ public:
     Frame mCurrentFrame;
     cv::Mat mImGray;
 
+    // Map
+    Map* mpMap;
+
     // Initialization Variables (Monocular)
     std::vector<int> mvIniLastMatches;
     std::vector<int> mvIniMatches;
@@ -178,8 +181,6 @@ protected:
     FrameDrawer* mpFrameDrawer;
     MapDrawer* mpMapDrawer;
 
-    //Map
-    Map* mpMap;
 
     //Calibration matrix
     cv::Mat mK;

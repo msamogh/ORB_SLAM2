@@ -208,6 +208,6 @@ private:
     cv::Mat mOw; //==mtwc
 };
 
-}// namespace ORB_SLAM
+} // namespace ORB_SLAM
 
 #endif // FRAME_H
